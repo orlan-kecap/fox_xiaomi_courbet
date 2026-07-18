@@ -35,10 +35,10 @@ if [ -z "$1" -a -z "$FOX_BUILD_DEVICE" ]; then
 fi
 
 if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
-        export FOX_USE_SPECIFIC_MAGISK_ZIP=~/Magisk/Magisk-v27.0.zip
-   	export TW_DEFAULT_LANGUAGE="en"
-	export LC_ALL="C"
- 	export ALLOW_MISSING_DEPENDENCIES=true
+        export FOX_USE_SPECIFIC_MAGISK_ZIP=~/Magisk/Magisk-v30.7.zip
+      export TW_DEFAULT_LANGUAGE="en"
+      export LC_ALL="C"
+      export ALLOW_MISSING_DEPENDENCIES=true
 	export FOX_USE_NANO_EDITOR=1
 	export FOX_ENABLE_APP_MANAGER=1
 	export FOX_USE_BASH_SHELL=1
@@ -47,15 +47,17 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export FOX_USE_SED_BINARY=1
 	export FOX_USE_ZSTD_BINARY=1
 	export FOX_USE_XZ_UTILS=1
-	export FOX_VARIANT=MIUI
-        export FOX_DELETE_AROMAFM=1
-        export TARGET_DEVICE_ALT="courbetin"
+    export FOX_DELETE_AROMAFM=1
+    export TARGET_DEVICE_ALT="courbetin"
 	export FOX_RECOVERY_SYSTEM_PARTITION="/dev/block/mapper/system"
 	export FOX_RECOVERY_VENDOR_PARTITION="/dev/block/mapper/vendor"
         export FOX_BUGGED_AOSP_ARB_WORKAROUND="1546300800"; # Tuesday, January 1, 2019 12:00:00 AM GMT+00:00
 
 	# R11.1 Settings
 	export OF_MAINTAINER="EsTeh"
+	export FOX_MAINTAINER_PATCH_VERSION="2"
+	export FOX_VARIANT=Universal
+	export FOX_BUILD_TYPE="Stable"
 
 else
 	if [ -z "$FOX_BUILD_DEVICE" -a -z "$BASH_SOURCE" ]; then

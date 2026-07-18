@@ -49,7 +49,7 @@ QCOM_BOARD_PLATFORMS += sm6150
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom androidboot.memcg=1 lpm_levels.sleep_disabled=1 video=vfb:640x400,bpp=32,memsize=3072000 msm_rtb.filter=0x237 service_locator.enable=1 swiotlb=1 androidboot.usbcontroller=a600000.dwc3 androidboot.selinux=permissive androidboot.usbconfigfs=true androidboot.recoveryboot=true
 BOARD_KERNEL_IMAGE_NAME := Image
 BOARD_KERNEL_PAGESIZE := 4096
-BOARD_BOOT_HEADER_VERSION := 2
+BOARD_BOOT_HEADER_VERSION := 1
 BOARD_KERNEL_BASE          := 0x00000000
 BOARD_KERNEL_TAGS_OFFSET   := 0x00000100
 BOARD_KERNEL_OFFSET        := 0x00008000
@@ -57,9 +57,10 @@ BOARD_KERNEL_SECOND_OFFSET := 0x00000000
 BOARD_RAMDISK_OFFSET       := 0x01000000
 BOARD_DTB_OFFSET           := 0x01f00000
 TARGET_KERNEL_ARCH := arm64
-TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
-BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/image.gz
+BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
 BOARD_INCLUDE_RECOVERY_DTBO := true
+BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 BOARD_MKBOOTIMG_ARGS += --base $(BOARD_KERNEL_BASE)
 BOARD_MKBOOTIMG_ARGS += --pagesize $(BOARD_KERNEL_PAGESIZE)
 BOARD_MKBOOTIMG_ARGS += --ramdisk_offset $(BOARD_RAMDISK_OFFSET)
@@ -68,6 +69,7 @@ BOARD_MKBOOTIMG_ARGS += --kernel_offset $(BOARD_KERNEL_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --second_offset $(BOARD_KERNEL_SECOND_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --dtb_offset $(BOARD_DTB_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
+BOARD_PREBUILT_DTBIMAGE_DIR := $(DEVICE_PATH)/prebuilt/dtb.img
 
 # Avb
 BOARD_AVB_ENABLE := true
@@ -76,7 +78,7 @@ BOARD_AVB_RECOVERY_KEY_PATH := external/avb/test/data/testkey_rsa4096.pem
 BOARD_AVB_RECOVERY_ALGORITHM := SHA256_RSA4096
 BOARD_AVB_RECOVERY_ROLLBACK_INDEX := 1
 BOARD_AVB_RECOVERY_ROLLBACK_INDEX_LOCATION := 1
-BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flag 3
+BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flag 2
 
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 262144
@@ -112,6 +114,18 @@ TW_FRAMERATE := 60
 TW_INCLUDE_PYTHON := true
 TW_INCLUDE_LOGICAL := true # Helps with Dynamic Partitions UI
 TW_NO_BIND_SYSTEM := true # Prevents mount issues on modern Android
+
+# UI & Tools
+TW_THEME := portrait_hdpi
+TW_USE_TOOLBOX := true
+
+#Neom_mostafameesr
+TW_INCLUDE_FASTBOOTD := true
+TW_INCLUDE_REPACKTOOLS := true
+TARGET_USES_MKE2FS := true
+TW_INCLUDE_NTFS_3G := true
+TW_INCLUDE_FUSE_EXFAT := true
+TW_HAS_FLASHLIGHT := true
 
 # Fix Screen Off Freezing & UI Glitches
 TW_NO_SCREEN_BLANK := true
